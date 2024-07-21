@@ -1,6 +1,6 @@
 {
     "ignored": false,
     "inferredParser": "typescript",
-    "tabWith": 4,
+    "tabWith": 2,
     "useTabs": false
 }
