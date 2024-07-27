@@ -5,16 +5,39 @@ import { ActionRowBuilder, ModalActionRowComponentBuilder, ModalBuilder, TextInp
  * @param userId Discord user id
  * @returns
  */
-export function buildVerificationEmailModal(userId: string) {
+export function buildVerificationEmailStudentModal(userId: string) {
   const textInput = new TextInputBuilder()
-    .setCustomId(`utp_verify_email-${userId}`)
+    .setCustomId('email')
     .setRequired(true)
     .setLabel('Correo UTP')
     .setMinLength(20)
     .setMaxLength(20)
-    .setPlaceholder('Ejmp: U2103142@utp.edu.pe')
+    .setPlaceholder('Ejmp: U01234567@utp.edu.pe')
     .setStyle(TextInputStyle.Short);
-  return new ModalBuilder().setCustomId(`utp_verify_email-${userId}`).setTitle('Verificación de correo').addComponents(new ActionRowBuilder<ModalActionRowComponentBuilder>().addComponents(textInput));
+  return new ModalBuilder()
+    .setCustomId(`utp_verify_email-student-${userId}`)
+    .setTitle('Verificación de estudiante')
+    .addComponents(new ActionRowBuilder<ModalActionRowComponentBuilder>().addComponents(textInput));
+}
+
+/**
+ * This function create a verification email modal with the user's ID for tracking purposes
+ * @param userId Discord user id
+ * @returns
+ */
+export function buildVerificationEmailTeacherModal(userId: string) {
+  const textInput = new TextInputBuilder()
+    .setCustomId('email')
+    .setRequired(true)
+    .setLabel('Correo UTP')
+    .setMinLength(17)
+    .setMaxLength(17)
+    .setPlaceholder('Ejmp: C01234@utp.edu.pe')
+    .setStyle(TextInputStyle.Short);
+  return new ModalBuilder()
+    .setCustomId(`utp_verify_email-teacher-${userId}`)
+    .setTitle('Verificación de docente')
+    .addComponents(new ActionRowBuilder<ModalActionRowComponentBuilder>().addComponents(textInput));
 }
 
 /**
