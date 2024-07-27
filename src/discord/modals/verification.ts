@@ -1,4 +1,4 @@
-import { TextInputBuilder, TextInputStyle } from 'discord.js';
+import { ActionRowBuilder, ModalActionRowComponentBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } from 'discord.js';
 
 /**
  * This function create a verification email modal with the user's ID for tracking purposes
@@ -6,7 +6,7 @@ import { TextInputBuilder, TextInputStyle } from 'discord.js';
  * @returns
  */
 export function buildVerificationEmailModal(userId: string) {
-  return new TextInputBuilder()
+  const textInput = new TextInputBuilder()
     .setCustomId(`utp_verify_email-${userId}`)
     .setRequired(true)
     .setLabel('Correo UTP')
@@ -14,6 +14,7 @@ export function buildVerificationEmailModal(userId: string) {
     .setMaxLength(20)
     .setPlaceholder('Ejmp: U2103142@utp.edu.pe')
     .setStyle(TextInputStyle.Short);
+  return new ModalBuilder().setCustomId(`utp_verify_email-${userId}`).setTitle('Verificación de correo').addComponents(new ActionRowBuilder<ModalActionRowComponentBuilder>().addComponents(textInput));
 }
 
 /**
