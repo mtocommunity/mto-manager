@@ -16,5 +16,8 @@ export default async function (client: Client) {
 
     // Listen event
     client.on(event.name, (...args) => event.run(client, ...args));
+
+    // Load event if needed
+    if (event.load) await event.load(client);
   }
 }
