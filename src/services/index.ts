@@ -1,1 +1,1 @@
-export * from './MailSender';
+export * from './MailSenderClient';

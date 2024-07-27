@@ -1,5 +1,6 @@
 import { Message } from 'discord.js';
 import { DiscordEvent } from '../../../ts';
+import MailSenderClient from '../../../services/MailSenderClient';
 
 /**
  * This event is triggered when a message is created.
@@ -11,6 +12,9 @@ const messageCreateEvent: DiscordEvent = {
     if (msg.author.bot) return;
     if (msg.content === '!ping') {
       msg.reply('Pong!');
+
+      // TODO: remove this line
+      MailSenderClient.sendVerifyEmail('u22203189@utp.edu.pe', '123456');
     }
   }
 };
