@@ -1,12 +1,12 @@
 import { BtnInteraction, InteractionType } from '../../../ts';
-import { buildVerificationEmailStudentModal, buildVerificationEmailTeacherModal } from '../../modals';
+import { buildVerificationCodeModal, buildVerificationEmailStudentModal, buildVerificationEmailTeacherModal } from '../../static/modals';
 
 const verification: BtnInteraction = {
   type: InteractionType.BUTTON,
   key: 'utp_verification',
   run: async (client, interaction, params) => {
     // Check the button params
-    if (params.length !== 2) {
+    if (params.length < 1) {
       interaction.reply({
         content: '❌ | Opción no válida',
         ephemeral: true
@@ -17,13 +17,16 @@ const verification: BtnInteraction = {
     switch (params[0]) {
       case 'code':
         // interaction.showModal(buildVerificationCodeModal(interaction.user.id));
-
-        interaction.reply({
-          content: '❌ | Opción no válida',
-          ephemeral: true
-        });
+        interaction.showModal(buildVerificationCodeModal(interaction.user.id));
         break;
       case 'email':
+        if (params.length !== 2) {
+          interaction.reply({
+            content: '❌ | Opción no válida',
+            ephemeral: true
+          });
+          return;
+        }
         switch (params[1]) {
           case 'student':
             interaction.showModal(buildVerificationEmailStudentModal(interaction.user.id));

@@ -4,7 +4,7 @@
   Example: utp_verification-code-student
 */
 
-import { ButtonInteraction, Client } from 'discord.js';
+import { ButtonInteraction, Client, ModalSubmitInteraction } from 'discord.js';
 
 export enum InteractionType {
   BUTTON,
@@ -20,4 +20,8 @@ export interface Interaction {
 
 export interface BtnInteraction extends Interaction {
   run: (client: Client, interaction: ButtonInteraction, params: string[], ...args: any[]) => void | Promise<void>;
+}
+
+export interface ModalInteraction extends Interaction {
+  run: (client: Client, interaction: ModalSubmitInteraction, params: string[], ...args: any[]) => void | Promise<void>;
 }

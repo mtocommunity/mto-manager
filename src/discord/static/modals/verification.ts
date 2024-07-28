@@ -46,7 +46,7 @@ export function buildVerificationEmailTeacherModal(userId: string) {
  * @returns
  */
 export function buildVerificationCodeModal(userId: string) {
-  return new TextInputBuilder()
+  const textInput = new TextInputBuilder()
     .setCustomId(`utp_verify_code-${userId}`)
     .setRequired(true)
     .setLabel('Código de verificación')
@@ -54,4 +54,9 @@ export function buildVerificationCodeModal(userId: string) {
     .setMaxLength(6)
     .setPlaceholder('Ejmp: AX2L3F')
     .setStyle(TextInputStyle.Short);
+
+  return new ModalBuilder()
+    .setCustomId(`utp_verify_email-student-${userId}`)
+    .setTitle('Código de verificación')
+    .addComponents(new ActionRowBuilder<ModalActionRowComponentBuilder>().addComponents(textInput));
 }

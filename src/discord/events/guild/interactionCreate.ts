@@ -1,6 +1,6 @@
 import { join as joinPath } from 'path';
-import { BaseInteraction } from 'discord.js';
-import { BtnInteraction, DiscordEvent, Interaction, InteractionType } from '../../../ts';
+import { BaseInteraction, ButtonInteraction } from 'discord.js';
+import { BtnInteraction, DiscordEvent, Interaction, InteractionType, ModalInteraction } from '../../../ts';
 import { readTypescriptFiles } from '../../../utils';
 
 const INTERACTIONS_DIR_PATH = '../../interactions';
@@ -28,6 +28,15 @@ const interactionCreate: DiscordEvent = {
           const [key] = interaction.customId.split('-');
           if (i.key === key) {
             (i as BtnInteraction).run(client, interaction, interaction.customId.split('-').slice(1));
+          }
+        });
+    } else if (interaction.isModalSubmit()) {
+      interactions
+        .filter((i) => i.type === InteractionType.MODAL)
+        .forEach(async (i) => {
+          const [key] = interaction.customId.split('-');
+          if (i.key === key) {
+            (i as ModalInteraction).run(client, interaction, interaction.customId.split('-').slice(1));
           }
         });
     }
