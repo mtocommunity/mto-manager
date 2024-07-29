@@ -1,5 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
-import Database from '../../database';
+import Database from '../Database';
 
 class VerifyCode extends Model {
   declare user_id: string;

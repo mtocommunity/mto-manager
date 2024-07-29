@@ -1,17 +1,11 @@
-import { Sequelize } from 'sequelize';
-import { DB_DATABASE, DB_HOST, DB_PASSWORD, DB_PORT, DB_USERNAME } from '../config';
+import { makeRelations } from './relations';
+import Database from './Database';
 
-const Database = new Sequelize(DB_DATABASE, DB_USERNAME, DB_PASSWORD, {
-  host: DB_HOST,
-  port: DB_PORT,
-  dialect: 'mariadb'
-});
-
-export async function connectDatabase() {
-  console.log(DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+export async function verifyConnection() {
+  makeRelations();
 
   Database.sync({
-    alter: true,
+    force: true,
     logging: false
   })
     .then(() => {
