@@ -4,6 +4,7 @@ import Database from '../Database';
 class VerifyCode extends Model {
   declare user_id: string;
   declare code: string;
+  declare created_at: Date;
 }
 
 VerifyCode.init(
@@ -25,7 +26,7 @@ VerifyCode.init(
   },
   {
     sequelize: Database,
-    tableName: 'verify_codes',
+    tableName: 'verification_code',
     timestamps: false
   }
 );

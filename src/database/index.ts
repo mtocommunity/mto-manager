@@ -5,7 +5,7 @@ export async function verifyConnection() {
   makeRelations();
 
   Database.sync({
-    force: true,
+    force: false,
     logging: false
   })
     .then(() => {

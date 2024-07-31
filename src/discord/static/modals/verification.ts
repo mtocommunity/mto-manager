@@ -55,8 +55,5 @@ export function buildVerificationCodeModal(userId: string) {
     .setPlaceholder('Ejmp: AX2L3F')
     .setStyle(TextInputStyle.Short);
 
-  return new ModalBuilder()
-    .setCustomId(`utp_verify_email-student-${userId}`)
-    .setTitle('Código de verificación')
-    .addComponents(new ActionRowBuilder<ModalActionRowComponentBuilder>().addComponents(textInput));
+  return new ModalBuilder().setCustomId(`utp_verify_code-${userId}`).setTitle('Código de verificación').addComponents(new ActionRowBuilder<ModalActionRowComponentBuilder>().addComponents(textInput));
 }
