@@ -11,12 +11,12 @@ const verification: ModalInteraction = {
   key: 'utp_verify_email',
   type: InteractionType.MODAL,
   run: async (client, interaction, params, ...args) => {
-    const email = interaction.components[0].components[0].value;
+    const email = interaction.components[0].components[0].value.toUpperCase();
 
-    if (params[1] !== 'student') return;
+    if (params[0] !== 'student') return;
 
     // Check the email
-    if (!email && params[1] === 'student' && !email.matchAll(/^u[0-9]{8}@utp.edu.pe$/)) {
+    if (!email && params[0] === 'student' && !email.matchAll(/^u[0-9]{8}@utp.edu.pe$/)) {
       interaction.reply({
         content: '❌ | Opción no válida',
         ephemeral: true
