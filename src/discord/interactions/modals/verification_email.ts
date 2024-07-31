@@ -13,6 +13,8 @@ const verification: ModalInteraction = {
   run: async (client, interaction, params, ...args) => {
     const email = interaction.components[0].components[0].value;
 
+    if (params[1] !== 'student') return;
+
     // Check the email
     if (!email && params[1] === 'student' && !email.matchAll(/^u[0-9]{8}@utp.edu.pe$/)) {
       interaction.reply({
