@@ -2,9 +2,9 @@ USE utp_community;
 
 CREATE TABLE users (
     user_id CHAR(18) PRIMARY KEY,
-    user_code CHAR(8) NOT NULL,
+    user_code CHAR(8) NOT NULL UNIQUE,
     email CHAR(20) NOT NULL UNIQUE,
-    username  VARCHAR(20) NOT NULL,
+    username VARCHAR(20) NOT NULL,
 );
 
 CREATE TABLE verification_code (
