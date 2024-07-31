@@ -82,7 +82,6 @@ const verification: ModalInteraction = {
 
     await user.save();
 
-    // TODO: Generate a random code and save it in the database
     const code = generateAlphaNumericCode(6);
     const verificationCode = new VerifyCode({
       user_id: interaction.user.id,
