@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  db:
+    image: mariadb:11.2.4-jammy
+    environment:
+      - MARIADB_ROOT_PASSWORD=${DB_PASSWORD}
+      - MARIADB_DATABASE=${DB_DATABASE}
+      - MARIADB_USER=${DB_USERNAME}
+      - MARIADB_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - ./database:/var/lib/mysql
+
+  mto-manager:
+    image: node:20.16.0-alpine3.20
+    volumes:
+      - ./:/app
+    command: ['cd', '/app', '&&', 'npm', 'i', '&&', 'npm', 'run', 'start']
