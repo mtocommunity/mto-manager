@@ -17,4 +17,4 @@ services:
     image: node:20.16.0-alpine3.20
     volumes:
       - ./:/app
-    command: ['cd', '/app', '&&', 'npm', 'i', '&&', 'npm', 'run', 'start']
+    command: 'cd /app && npm i && npm run start'
