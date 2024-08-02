@@ -3,6 +3,7 @@ version: '3'
 services:
   db:
     image: mariadb:11.2.4-jammy
+    restart: always
     environment:
       - MARIADB_ROOT_PASSWORD=${DB_PASSWORD}
       - MARIADB_DATABASE=${DB_DATABASE}
@@ -15,5 +16,6 @@ services:
     depends_on:
       - db
     image: mto-manager:1.0
+    restart: always
     env_file:
       - ./.env
