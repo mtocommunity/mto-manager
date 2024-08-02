@@ -12,7 +12,7 @@ export function buildVerificationEmailStudentModal(userId: string) {
     .setLabel('Correo UTP')
     .setMinLength(20)
     .setMaxLength(20)
-    .setPlaceholder('Ejmp: U01234567@utp.edu.pe')
+    .setPlaceholder('Ejemplo: U01234567@utp.edu.pe')
     .setStyle(TextInputStyle.Short);
   return new ModalBuilder()
     .setCustomId(`utp_verify_email-student-${userId}`)
@@ -32,7 +32,7 @@ export function buildVerificationEmailTeacherModal(userId: string) {
     .setLabel('Correo UTP')
     .setMinLength(17)
     .setMaxLength(17)
-    .setPlaceholder('Ejmp: C01234@utp.edu.pe')
+    .setPlaceholder('Ejemplo: C01234@utp.edu.pe')
     .setStyle(TextInputStyle.Short);
   return new ModalBuilder()
     .setCustomId(`utp_verify_email-teacher-${userId}`)
