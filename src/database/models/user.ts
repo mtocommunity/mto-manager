@@ -12,7 +12,7 @@ class User extends Model {
 User.init(
   {
     user_id: {
-      type: DataTypes.CHAR(18),
+      type: DataTypes.CHAR(20),
       allowNull: false,
       primaryKey: true
     },
