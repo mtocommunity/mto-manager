@@ -3,6 +3,7 @@ import Database from '../Database';
 
 class User extends Model {
   declare user_id: string;
+  declare discord_id: string;
   declare user_code: string;
   declare email: string;
   declare username: string;

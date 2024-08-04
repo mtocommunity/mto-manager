@@ -62,7 +62,7 @@ const verification: ModalInteraction = {
         } else {
           // Create a new code
           const verificationCode = new VerifyCode({
-            user_id: interaction.user.id,
+            discord_id: interaction.user.id,
             code: code
           });
           await verificationCode.save();
@@ -74,7 +74,7 @@ const verification: ModalInteraction = {
 
     // Register user
     const user = new User({
-      user_id: interaction.user.id,
+      discord_id: interaction.user.id,
       username: interaction.user.username,
       user_code: email.split('@')[0],
       email: email
@@ -84,7 +84,7 @@ const verification: ModalInteraction = {
 
     const code = generateAlphaNumericCode(6);
     const verificationCode = new VerifyCode({
-      user_id: interaction.user.id,
+      discord_id: interaction.user.id,
       code: code
     });
 
