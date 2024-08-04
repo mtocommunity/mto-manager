@@ -11,8 +11,8 @@ export default function makeRelations() {
   });
 
   VerifyCode.belongsTo(User, {
-    targetKey: 'user_id',
-    foreignKey: 'user_id',
+    targetKey: 'discord_id',
+    foreignKey: 'discord_id',
     as: 'user'
   });
 
