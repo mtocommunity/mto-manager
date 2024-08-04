@@ -20,7 +20,7 @@ UserTeam.init(
       allowNull: false
     },
     role: {
-      type: DataTypes.ENUM<UserTeamRole>,
+      type: DataTypes.ENUM(UserTeamRole.LEADER, UserTeamRole.PARTICIPANT),
       allowNull: false
     },
     joined_at: {
