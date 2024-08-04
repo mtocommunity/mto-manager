@@ -1,9 +1,8 @@
 import { GuildMember, GuildMemberRoleManager } from 'discord.js';
 import User from '../../../database/models/user';
-import VerifyCode from '../../../database/models/verify_code';
 import { InteractionType, ModalInteraction } from '../../../ts';
 import Config from '../../../config';
-import { DeleteCode, ExistCode } from '../../../database/functions/verify_code';
+import { DeleteCode, ExistCode } from '../../../database/functions';
 
 const verification: ModalInteraction = {
   key: 'utp_verify_code',
@@ -55,9 +54,11 @@ const verification: ModalInteraction = {
     userData.verified = true;
     const guildMemberRoleManager = interaction.member?.roles as GuildMemberRoleManager;
 
+    // Set the roles
     await guildMemberRoleManager.add(Config.COMMUNITY_GUILD.colaboratorRole);
     await guildMemberRoleManager.remove(Config.COMMUNITY_GUILD.unverifyRole);
 
+    // Save the user
     await userData.save();
 
     interaction.reply({
