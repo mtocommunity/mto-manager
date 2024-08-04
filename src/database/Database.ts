@@ -1,11 +1,11 @@
 import { Sequelize } from 'sequelize';
-import { DB_DATABASE, DB_HOST, DB_PASSWORD, DB_PORT, DB_USERNAME } from '../config';
+import Config from '../config';
 
-const Database = new Sequelize(DB_DATABASE, DB_USERNAME, DB_PASSWORD, {
-  host: DB_HOST,
-  port: DB_PORT,
-  dialect: 'mariadb',
-  logging: false
+const Database = new Sequelize(Config.DB.DATABASE, Config.DB.USERNAME, Config.DB.PASSWORD, {
+    host: Config.DB.HOST,
+    port: Config.DB.PORT,
+    dialect: 'mariadb',
+    logging: false
 });
 
 export default Database;
