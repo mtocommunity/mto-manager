@@ -47,7 +47,7 @@ const verification: ModalInteraction = {
     }
 
     // Verify the user
-    const userData = await User.findOne({ where: { user_id: interaction.user.id } });
+    const userData = await User.findOne({ where: { discord_id: interaction.user.id } });
 
     if (!userData) return;
 

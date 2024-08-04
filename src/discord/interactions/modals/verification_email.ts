@@ -25,7 +25,7 @@ const verification: ModalInteraction = {
     }
 
     // Check if the email is already registered
-    const verificationCodeData = await VerifyCode.findOne({ where: { user_id: interaction.user.id } });
+    const verificationCodeData = await VerifyCode.findOne({ where: { discord_id: interaction.user.id } });
 
     if (verificationCodeData && verificationCodeData.created_at.getTime() > Date.now() - 120 * 1000) {
       // Code was sent less than 2 minutes ago
