@@ -12,9 +12,14 @@ class User extends Model {
 User.init(
   {
     user_id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true
+    },
+    discord_id: {
       type: DataTypes.CHAR(20),
       allowNull: false,
-      primaryKey: true
+      unique: true
     },
     user_code: {
       type: DataTypes.CHAR(9),

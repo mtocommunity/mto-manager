@@ -2,14 +2,14 @@ import { DataTypes, Model } from 'sequelize';
 import Database from '../Database';
 
 class VerifyCode extends Model {
-  declare user_id: string;
+  declare discord_id: string;
   declare code: string;
   declare created_at: Date;
 }
 
 VerifyCode.init(
   {
-    user_id: {
+    discord_id: {
       type: DataTypes.CHAR(20),
       allowNull: false,
       primaryKey: true
