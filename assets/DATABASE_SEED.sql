@@ -19,6 +19,7 @@ CREATE TABLE verification_code (
 CREATE TABLE team (
   team_id INT PRIMARY KEY AUTO_INCREMENT,
   name VARCHAR(45) NOT NULL,
+  display_name VARCHAR(45),
   description TEXT NOT NULL,
   member_role_id CHAR(20),
   leader_role_id CHAR(20),
@@ -35,3 +36,12 @@ CREATE TABLE user_team (
   FOREIGN KEY (user_id) REFERENCES user(user_id),
   FOREIGN KEY (team_id) REFERENCES team(team_id)
 );
+
+-- Insert team data
+
+INSERT INTO team (name, display_name, description) VALUES
+('dev', 'Dev Team', ''),
+('net', 'Net Team', ''),
+('os', 'OS Team', ''),
+('iot', 'IOT Team', ''),
+('sec', 'Security Team', '');

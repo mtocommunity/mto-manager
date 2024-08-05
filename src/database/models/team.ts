@@ -20,6 +20,11 @@ Team.init(
       type: DataTypes.STRING(45),
       allowNull: false
     },
+    displayName: {
+      type: DataTypes.STRING(45),
+      allowNull: true,
+      field: 'display_name'
+    },
     description: {
       type: DataTypes.TEXT,
       allowNull: false,
