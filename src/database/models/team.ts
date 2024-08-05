@@ -4,6 +4,7 @@ import Database from '../Database';
 class Team extends Model {
   declare team_id: number;
   declare name: string;
+  declare displayName: string;
   declare description: string;
   declare member_role_id: string;
   declare leader_role_id: string;
@@ -42,6 +43,8 @@ Team.init(
   {
     sequelize: Database,
     timestamps: true,
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
     tableName: 'team'
   }
 );
