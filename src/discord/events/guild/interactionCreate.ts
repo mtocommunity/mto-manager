@@ -21,14 +21,15 @@ const interactionCreate: DiscordEvent = {
     }
   },
   run: (client, interaction: BaseInteraction) => {
+    // Filter the interaction type
     if (interaction.isButton()) {
       interactions
         .filter((i) => i.type === InteractionType.BUTTON)
         .forEach(async (i) => {
           const [key] = interaction.customId.split('-');
           if (i.key === key) {
+            // Run the interaction
             (i as BtnInteraction).run(client, interaction, interaction.customId.split('-').slice(1));
-            console.log(interaction.customId);
           }
         });
     } else if (interaction.isModalSubmit()) {
@@ -37,6 +38,7 @@ const interactionCreate: DiscordEvent = {
         .forEach(async (i) => {
           const [key] = interaction.customId.split('-');
           if (i.key === key) {
+            // Run the interaction
             (i as ModalInteraction).run(client, interaction, interaction.customId.split('-').slice(1));
           }
         });
