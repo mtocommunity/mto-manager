@@ -11,7 +11,7 @@ const verification: ModalInteraction = {
   key: 'utp_verify_email',
   type: InteractionType.MODAL,
   run: async (client, interaction, params, ...args) => {
-    const email = interaction.components[0].components[0].value.toUpperCase();
+    const email = interaction.components[0].components[0].value.toLocaleLowerCase();
 
     if (params[0] !== 'student') return;
 
@@ -76,7 +76,7 @@ const verification: ModalInteraction = {
     const user = new User({
       discord_id: interaction.user.id,
       username: interaction.user.username,
-      user_code: email.split('@')[0],
+      user_code: email.split('@')[0].toUpperCase(),
       email: email
     });
 
