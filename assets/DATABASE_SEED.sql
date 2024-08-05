@@ -39,9 +39,9 @@ CREATE TABLE user_team (
 
 -- Insert team data
 
-INSERT INTO team (name, display_name, description) VALUES
-('dev', 'Dev Team', ''),
-('net', 'Net Team', ''),
-('os', 'OS Team', ''),
-('iot', 'IOT Team', ''),
-('sec', 'Security Team', '');
+INSERT INTO team (name, display_name, description, member_role_id, leader_role_id) VALUES
+('dev', 'Dev Team', '', '1268626577093300234', '1265044817079963648'),
+('net', 'Net Team', '', '1268626753472041084', '1265045063986188339'),
+('os', 'OS Team', '', '1268626921378283561', '1265045188980772884'),
+('iot', 'IOT Team', '', '1268626994522882129', '1265045540870033449'),
+('sec', 'Security Team', '', '1265045762178285579', '1265045762178285579');
