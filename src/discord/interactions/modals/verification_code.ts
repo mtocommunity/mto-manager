@@ -2,7 +2,7 @@ import { GuildMember, GuildMemberRoleManager } from 'discord.js';
 import User from '../../../database/models/user';
 import { InteractionType, ModalInteraction } from '../../../ts';
 import Config from '../../../config';
-import { DeleteCode, ExistCode } from '../../../database/functions';
+import { deleteCode, existCode } from '../../../database/functions';
 
 const verification: ModalInteraction = {
   key: 'utp_verify_code',
@@ -21,7 +21,7 @@ const verification: ModalInteraction = {
     }
 
     // Check if the code is valid
-    const verificationCodeDat = await ExistCode(memberId);
+    const verificationCodeDat = await existCode(memberId);
     if (!verificationCodeDat) {
       interaction.reply({ content: '❌ | No existe un código de verificación' });
       return;
@@ -38,7 +38,7 @@ const verification: ModalInteraction = {
 
     // Check if the code is expired (5 minutes)
     if (verificationCodeDat.created_at.getTime() < Date.now() - 5 * 60 * 1000) {
-      await DeleteCode(interaction.id);
+      await deleteCode(interaction.id);
       interaction.reply({
         content: '❌ | Código de verificación expirado',
         ephemeral: true

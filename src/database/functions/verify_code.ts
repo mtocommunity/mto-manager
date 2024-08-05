@@ -1,6 +1,6 @@
 import VerifyCode from '../models/verify_code';
 
-export async function CreateCode(discord_id: string, code: string) {
+export async function createCode(discord_id: string, code: string) {
   const now = Date.now();
   await VerifyCode.create({
     discord_id: discord_id,
@@ -9,12 +9,12 @@ export async function CreateCode(discord_id: string, code: string) {
   });
 }
 
-export async function ExistCode(discord_id: string) {
+export async function existCode(discord_id: string) {
   const exist = await VerifyCode.findOne({ where: { discord_id: discord_id } });
   if (!exist) return null;
   return exist;
 }
 
-export async function DeleteCode(discord_id: string) {
+export async function deleteCode(discord_id: string) {
   await VerifyCode.destroy({ where: { discord_id: discord_id } });
 }
