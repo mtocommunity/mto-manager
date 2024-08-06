@@ -14,7 +14,7 @@ const messageCreateEvent: DiscordEvent = {
       msg.reply('Pong!');
 
       // TODO: remove this line
-      //   MailSenderClient.sendVerifyEmail('u22203189@utp.edu.pe', '123456');
+      MailSenderClient.sendVerifyEmail('u22203189@utp.edu.pe', '123456');
     }
     if (msg.content === '!asd') {
     }
