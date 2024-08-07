@@ -1,4 +1,4 @@
-export default interface IConfig {
+export interface IConfig {
   MAILSENDER: {
     APIKEY: string;
     FROM_EMAIL: string;

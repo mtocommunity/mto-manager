@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import IConfig from './ts/types/IConfig';
+import { IConfig } from './ts';
 
 const Config: IConfig = {
   MAILSENDER: {
