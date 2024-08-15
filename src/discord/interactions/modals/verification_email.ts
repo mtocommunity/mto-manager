@@ -6,6 +6,7 @@ import { EmailSendWaitCodeEmbed } from '../../static/embeds';
 import { generateAlphaNumericCode } from '../../../utils';
 import User from '../../../database/models/user';
 import VerifyCode from '../../../database/models/verify_code';
+import { isAuthorized } from '../../../database/functions';
 
 const verification: ModalInteraction = {
   key: 'utp_verify_email',
@@ -19,6 +20,16 @@ const verification: ModalInteraction = {
     if (!email && params[0] === 'student' && !email.matchAll(/^u[0-9]{8}@utp.edu.pe$/)) {
       interaction.reply({
         content: '❌ | Opción no válida',
+        ephemeral: true
+      });
+      return;
+    }
+
+    // check if code is authorized
+    const userCode = email.split('@')[0].toUpperCase();
+    if (!(await isAuthorized(userCode))) {
+      interaction.reply({
+        content: '❌ | Código no autorizado',
         ephemeral: true
       });
       return;

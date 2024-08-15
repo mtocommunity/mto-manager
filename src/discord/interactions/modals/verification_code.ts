@@ -2,7 +2,7 @@ import { GuildMember, GuildMemberRoleManager } from 'discord.js';
 import User from '../../../database/models/user';
 import { InteractionType, ModalInteraction } from '../../../ts';
 import Config from '../../../config';
-import { deleteCode, existCode } from '../../../database/functions';
+import { deleteCode, deleteCodeAuthorized, existCode } from '../../../database/functions';
 
 const verification: ModalInteraction = {
   key: 'utp_verify_code',
@@ -60,6 +60,7 @@ const verification: ModalInteraction = {
 
     // Save the user
     await userData.save();
+    await deleteCodeAuthorized(userData.user_code.toUpperCase());
 
     interaction.reply({
       content: '✅ | Verificado correctamente',
