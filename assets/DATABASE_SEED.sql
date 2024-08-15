@@ -37,6 +37,10 @@ CREATE TABLE user_team (
   FOREIGN KEY (team_id) REFERENCES team(team_id)
 );
 
+CREATE TABLE codes_authorized (
+  code CHAR(9) PRIMARY KEY,
+);
+
 -- Insert team data
 
 INSERT INTO team (name, display_name, description, member_role_id, leader_role_id) VALUES
