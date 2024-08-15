@@ -15,7 +15,8 @@ CodesAuthorized.init(
   },
   {
     sequelize: Database,
-    tableName: 'codes_authorized'
+    tableName: 'codes_authorized',
+    timestamps: false
   }
 );
 
