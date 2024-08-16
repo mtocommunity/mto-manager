@@ -1,8 +1,15 @@
 export interface IConfig {
-  MAILSENDER: {
-    APIKEY: string;
-    FROM_EMAIL: string;
-    FROM_PASSWORD: string;
+  EMAIL: {
+    NO_REPLY: string;
+  };
+  DISCORD: {
+    TOKEN: string;
+    BOT_MANAGER_ID: string;
+  };
+  AWS: {
+    REGION: string;
+    ACCESS_KEY_ID: string;
+    SECRET_ACCESS_KEY: string;
   };
   DB: {
     HOST: string;

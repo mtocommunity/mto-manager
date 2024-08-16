@@ -1,3 +1,3 @@
-# Notes
+# Services
 
--   https://www.mailersend.com/
+- Email service: AWS SES

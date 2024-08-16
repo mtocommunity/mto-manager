@@ -1,5 +1,6 @@
 import { Client, IntentsBitField } from 'discord.js';
 import eventHandler from './eventHandler';
+import Config from '../config';
 
 const client = new Client({
   intents: [IntentsBitField.Flags.Guilds, IntentsBitField.Flags.GuildMessages, IntentsBitField.Flags.MessageContent]
@@ -7,4 +8,4 @@ const client = new Client({
 
 eventHandler(client);
 
-client.login(process.env.DISCORD_BOT_TOKEN);
+client.login(Config.DISCORD.TOKEN);

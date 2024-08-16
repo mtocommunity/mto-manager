@@ -1,6 +1,6 @@
 import { Message } from 'discord.js';
 import { DiscordEvent } from '../../../ts';
-import MailSenderClient from '../../../services/MailSenderClient';
+import emailSender from '../../../services/SimpleEmailService';
 
 /**
  * This event is triggered when a message is created.
@@ -14,7 +14,7 @@ const messageCreateEvent: DiscordEvent = {
       msg.reply('Pong!');
 
       // TODO: remove this line
-      // MailSenderClient.sendVerifyEmail('u22203189@utp.edu.pe', '123456');
+      // emailSender.sendVerifyEmail('U22203189@utp.edu.pe', '123456');
     }
     if (msg.content === '!asd') {
     }

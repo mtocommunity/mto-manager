@@ -2,10 +2,17 @@ import 'dotenv/config';
 import { IConfig } from './ts';
 
 const Config: IConfig = {
-  MAILSENDER: {
-    APIKEY: process.env.MAILSENDER_APIKEY ?? '',
-    FROM_EMAIL: process.env.MAILSENDER_FROM_EMAIL ?? '',
-    FROM_PASSWORD: process.env.MAILSENDER_FROM_PASSWORD ?? ''
+  EMAIL: {
+    NO_REPLY: 'no-reply@mtocommunity.com'
+  },
+  DISCORD: {
+    TOKEN: process.env.DISCORD_BOT_TOKEN ?? '',
+    BOT_MANAGER_ID: process.env.DISCORD_BOT_MANAGER_ID ?? ''
+  },
+  AWS: {
+    REGION: process.env.AWS_REGION ?? 'us-east-2',
+    ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID ?? '',
+    SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY ?? ''
   },
   DB: {
     HOST: process.env.DB_HOST ?? '',

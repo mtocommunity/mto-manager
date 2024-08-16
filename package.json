@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "src/index.ts",
   "dependencies": {
+    "@aws-sdk/client-ses": "^3.632.0",
     "axios": "^1.7.2",
     "discord.js": "^14.15.3",
     "dotenv": "^16.4.5",

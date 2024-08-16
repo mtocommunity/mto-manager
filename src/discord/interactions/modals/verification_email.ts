@@ -1,5 +1,4 @@
 import { ActionRowBuilder, MessageActionRowComponentBuilder, ModalSubmitInteraction } from 'discord.js';
-import mailSenderClient from '../../../services/MailSenderClient';
 import { InteractionType, ModalInteraction } from '../../../ts';
 import { buildVerificationCodeButton } from '../../static/buttons';
 import { EmailSendWaitCodeEmbed } from '../../static/embeds';
@@ -7,6 +6,7 @@ import { generateAlphaNumericCode } from '../../../utils';
 import User from '../../../database/models/user';
 import VerifyCode from '../../../database/models/verify_code';
 import { isAuthorized } from '../../../database/functions';
+import emailSender from '../../../services/SimpleEmailService';
 
 const verification: ModalInteraction = {
   key: 'utp_verify_email',
@@ -105,7 +105,7 @@ const verification: ModalInteraction = {
 };
 
 async function sendEmail(email: string, code: string, interaction: ModalSubmitInteraction): Promise<boolean> {
-  const sentEmail = await mailSenderClient.sendVerifyEmail(email, code);
+  const sentEmail = await emailSender.sendVerifyEmail(email, code);
 
   if (!sentEmail) {
     interaction.reply({
