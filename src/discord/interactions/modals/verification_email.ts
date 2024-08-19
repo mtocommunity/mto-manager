@@ -1,7 +1,7 @@
 import { ActionRowBuilder, MessageActionRowComponentBuilder, ModalSubmitInteraction } from 'discord.js';
 import { InteractionType, ModalInteraction } from '../../../ts';
 import { buildVerificationCodeButton } from '../../static/buttons';
-import { EmailSendWaitCodeEmbed } from '../../static/embeds';
+import { buildCodeNotAuthorizedEmbed, EmailSendWaitCodeEmbed } from '../../static/embeds';
 import { generateAlphaNumericCode } from '../../../utils';
 import User from '../../../database/models/user';
 import VerifyCode from '../../../database/models/verify_code';
@@ -19,7 +19,7 @@ const verification: ModalInteraction = {
     // Check the email
     if (!email && params[0] === 'student' && !email.matchAll(/^u[0-9]{8}@utp.edu.pe$/)) {
       interaction.reply({
-        content: '❌ | Opción no válida',
+        content: '❌ | Correo no válido, debes usar tu correo UTP',
         ephemeral: true
       });
       return;
@@ -29,7 +29,7 @@ const verification: ModalInteraction = {
     const userCode = email.split('@')[0].toUpperCase();
     if (!(await isAuthorized(userCode))) {
       interaction.reply({
-        content: '❌ | Código no autorizado',
+        embeds: [buildCodeNotAuthorizedEmbed()],
         ephemeral: true
       });
       return;

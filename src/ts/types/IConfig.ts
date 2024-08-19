@@ -5,6 +5,7 @@ export interface IConfig {
   DISCORD: {
     TOKEN: string;
     BOT_MANAGER_ID: string;
+    ADMINISTRATORS_ID: string[];
   };
   AWS: {
     REGION: string;
