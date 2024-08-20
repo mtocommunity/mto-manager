@@ -17,7 +17,7 @@ const verification: ModalInteraction = {
     if (params[0] !== 'student') return;
 
     // Check the email
-    if (!email || !email.matchAll(/^u[0-9]{8}@utp.edu.pe$/)) {
+    if (!email || !email.match(/^u[0-9]{8}@utp.edu.pe$/)) {
       interaction.reply({
         content: '❌ | Correo no válido, debes usar tu correo UTP',
         ephemeral: true
