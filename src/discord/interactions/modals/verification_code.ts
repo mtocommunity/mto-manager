@@ -37,7 +37,7 @@ const verification: ModalInteraction = {
     }
 
     // Check if the code is expired (5 minutes)
-    if (verificationCodeDat.created_at.getTime() < Date.now() - 5 * 60 * 1000) {
+    if (verificationCodeDat.created_at.getTime() < Date.now() - 15 * 60 * 1000) {
       await deleteCode(interaction.id);
       interaction.reply({
         content: '❌ | Código de verificación expirado',
