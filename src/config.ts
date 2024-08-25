@@ -25,7 +25,8 @@ const Config: IConfig = {
   COMMUNITY_GUILD: {
     unverifyRole: '1261606735471181854',
     colaboratorRole: '1261157414099615784'
-  }
+  },
+  ENV_DEV: process.env.ENV_DEV ? true : false
 };
 
 export default Config;

@@ -2,6 +2,7 @@ import { join as joinPath } from 'path';
 import { BaseInteraction, ButtonInteraction } from 'discord.js';
 import { BtnInteraction, DiscordEvent, Interaction, InteractionType, ModalInteraction } from '../../../ts';
 import { readTypescriptFiles } from '../../../utils';
+import Config from '../../../config';
 
 const INTERACTIONS_DIR_PATH = '../../interactions';
 
@@ -21,6 +22,9 @@ const interactionCreate: DiscordEvent = {
     }
   },
   run: (client, interaction: BaseInteraction) => {
+    // Ignore others users in development
+    if (Config.ENV_DEV && !Config.DISCORD.ADMINISTRATORS_ID.includes(interaction.user.id)) return;
+
     // Filter the interaction type
     if (interaction.isButton()) {
       interactions

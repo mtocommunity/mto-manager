@@ -23,4 +23,5 @@ export interface IConfig {
     unverifyRole: string;
     colaboratorRole: string;
   };
+  ENV_DEV: boolean;
 }
