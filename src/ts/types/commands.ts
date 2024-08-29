@@ -1,4 +1,4 @@
-import { ApplicationCommandDataResolvable } from 'discord.js';
+import { ApplicationCommandDataResolvable, CommandInteraction } from 'discord.js';
 import { DiscordClient } from './discordClient';
 
 export enum CommandCategory {
@@ -22,5 +22,5 @@ export type Command = {
   accessType: CommandAccessType;
   data: ApplicationCommandDataResolvable;
   load?: (client: DiscordClient) => Promise<void>;
-  execute: (client: DiscordClient, interaction: any) => Promise<void>;
+  execute: (client: DiscordClient, interaction: CommandInteraction) => Promise<void>;
 };

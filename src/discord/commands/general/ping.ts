@@ -23,8 +23,8 @@ const PingCommand: Command = {
     console.log('Ping command loaded!');
   },
   execute: async (client, interaction) => {
-    const message = interaction.options.getString('message') || 'Pong!';
-    await interaction.reply(message);
+    const message = interaction.options.get('message')?.value || 'Pong!';
+    await interaction.reply(message.toString());
   }
 };
 
