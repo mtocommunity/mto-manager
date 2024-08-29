@@ -1,8 +1,9 @@
-import { Client, IntentsBitField } from 'discord.js';
+import { IntentsBitField } from 'discord.js';
 import { runHandler } from './handlers';
 import Config from '../config';
+import { DiscordClient } from '../ts';
 
-const client = new Client({
+const client = new DiscordClient({
   intents: [IntentsBitField.Flags.Guilds, IntentsBitField.Flags.GuildMessages, IntentsBitField.Flags.MessageContent]
 });
 

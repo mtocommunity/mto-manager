@@ -4,24 +4,25 @@
   Example: utp_verification-code-student
 */
 
-import { ButtonInteraction, Client, ModalSubmitInteraction } from 'discord.js';
+import { ButtonInteraction, ModalSubmitInteraction } from 'discord.js';
+import { DiscordClient } from './discordClient';
 
 export enum InteractionType {
-    BUTTON,
-    COMMAND,
-    MODAL,
-    SELECT_MENU
+  BUTTON,
+  COMMAND,
+  MODAL,
+  SELECT_MENU
 }
 
 export interface Interaction {
-    type: InteractionType;
-    key: string;
+  type: InteractionType;
+  key: string;
 }
 
 export interface BtnInteraction extends Interaction {
-    run: (client: Client, interaction: ButtonInteraction, params: string[], ...args: any[]) => void | Promise<void>;
+  run: (client: DiscordClient, interaction: ButtonInteraction, params: string[], ...args: any[]) => void | Promise<void>;
 }
 
 export interface ModalInteraction extends Interaction {
-    run: (client: Client, interaction: ModalSubmitInteraction, params: string[], ...args: any[]) => void | Promise<void>;
+  run: (client: DiscordClient, interaction: ModalSubmitInteraction, params: string[], ...args: any[]) => void | Promise<void>;
 }

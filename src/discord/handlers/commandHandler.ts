@@ -1,4 +1,4 @@
-import { Client } from 'discord.js';
+import { Client, Collection } from 'discord.js';
 
 const COMMANDS_DIR_PATH = '../commands';
 

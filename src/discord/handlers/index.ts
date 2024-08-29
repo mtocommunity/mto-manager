@@ -1,8 +1,8 @@
-import { Client } from 'discord.js';
 import eventHandler from './eventHandler';
 import commandHandler from './commandHandler';
+import { DiscordClient } from '../../ts';
 
-export function runHandler(client: Client) {
+export function runHandler(client: DiscordClient) {
   eventHandler(client);
   commandHandler(client);
 }
