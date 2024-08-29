@@ -8,7 +8,8 @@ const Config: IConfig = {
   DISCORD: {
     TOKEN: process.env.DISCORD_BOT_TOKEN ?? '',
     BOT_MANAGER_ID: process.env.DISCORD_BOT_MANAGER_ID ?? '',
-    ADMINISTRATORS_ID: ['1261146736064204932'] // First ID is the main administrator
+    ADMINISTRATORS_ID: ['335163330471788545'], // First ID is the main administrator
+    COMMUNITY_GUILD_ID: '1261146736064204932'
   },
   AWS: {
     REGION: process.env.AWS_REGION ?? 'us-east-2',

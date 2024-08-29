@@ -6,6 +6,7 @@ export interface IConfig {
     TOKEN: string;
     BOT_MANAGER_ID: string;
     ADMINISTRATORS_ID: string[];
+    COMMUNITY_GUILD_ID: string;
   };
   AWS: {
     REGION: string;

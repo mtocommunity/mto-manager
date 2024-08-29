@@ -1,6 +1,6 @@
 import { join as joinPath } from 'path';
-import { BaseInteraction, ButtonInteraction } from 'discord.js';
-import { BtnInteraction, DiscordEvent, Interaction, InteractionType, ModalInteraction } from '../../../ts';
+import { ApplicationCommandType, BaseInteraction, ButtonInteraction } from 'discord.js';
+import { BtnInteraction, CommandCategory, DiscordEvent, Interaction, InteractionType, ModalInteraction } from '../../../ts';
 import { readTypescriptFiles } from '../../../utils';
 import Config from '../../../config';
 
@@ -46,6 +46,42 @@ const interactionCreate: DiscordEvent = {
             (i as ModalInteraction).run(client, interaction, interaction.customId.split('-').slice(1));
           }
         });
+    } else if (interaction.isCommand()) {
+      const command = client.commandList.get(interaction.commandName);
+
+      if (!command) return;
+
+      if (Config.ENV_DEV) {
+        // Dev environment
+
+        // Ignore non-experimental commands
+        if (command.category !== CommandCategory.EXPERIMENTAL) return;
+
+        // Check user permissions
+        if (!Config.DISCORD.ADMINISTRATORS_ID.includes(interaction.user.id)) return;
+
+        // Execute the command
+        command.execute(client, interaction);
+      } else {
+        // Production environment
+
+        // Execute non-experimental commands
+        if (command.category !== CommandCategory.EXPERIMENTAL) {
+          // Execute the command
+          command.execute(client, interaction);
+          return;
+        }
+
+        // Check user permissions
+        if (!Config.DISCORD.ADMINISTRATORS_ID.includes(interaction.user.id)) {
+          // User is not authorized
+          interaction.reply({
+            content: 'Este es un comando experimental y no tienes permisos para usarlo.',
+            ephemeral: true
+          });
+          return;
+        }
+      }
     }
   }
 };

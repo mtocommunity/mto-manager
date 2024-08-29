@@ -9,9 +9,17 @@ export enum CommandCategory {
   EXPERIMENTAL
 }
 
+export enum CommandAccessType {
+  COMMUNITY_GUILD,
+  PROJECT_GUILD,
+  DM,
+  ALL
+}
+
 export type Command = {
   name: string;
   category: CommandCategory;
+  accessType: CommandAccessType;
   data: ApplicationCommandDataResolvable;
   load?: (client: DiscordClient) => Promise<void>;
   execute: (client: DiscordClient, interaction: any) => Promise<void>;
