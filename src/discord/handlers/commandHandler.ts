@@ -1,6 +1,6 @@
 import { readTypescriptFiles } from '../../utils';
 import { join as joinPath } from 'path';
-import { CommandAccessType, DiscordClient } from '../../ts';
+import { Command, CommandAccessType, DiscordClient } from '../../ts';
 import Config from '../../config';
 
 const COMMANDS_DIR_PATH = '../commands';
@@ -11,7 +11,10 @@ export default async function commandHandler(client: DiscordClient) {
 
   // Loop through the files and set the commands
   for (const commandFile of commandsFiles) {
-    const command = (await import(`${COMMANDS_DIR_PATH}/${commandFile}`)).default;
+    const command: Command = (await import(`${COMMANDS_DIR_PATH}/${commandFile}`)).default;
+
+    // Load the command
+    if (command.load) await command.load(client);
 
     // Set the command
     client.commandList.set(command.name, command);
