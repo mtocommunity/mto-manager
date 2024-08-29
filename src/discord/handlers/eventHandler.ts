@@ -1,9 +1,9 @@
 import { Client } from 'discord.js';
-import { DiscordEvent } from '../ts';
-import { readTypescriptFiles } from '../utils';
+import { DiscordEvent } from '../../ts';
+import { readTypescriptFiles } from '../../utils';
 import { join as joinPath } from 'path';
 
-const EVENT_DIR_PATH = './events';
+const EVENT_DIR_PATH = '../events';
 
 export default async function (client: Client) {
   // Read the events folder and import the files
