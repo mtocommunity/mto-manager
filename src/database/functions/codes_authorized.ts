@@ -26,3 +26,38 @@ export async function deleteCodeAuthorized(code: string): Promise<void> {
     }
   });
 }
+
+/**
+ *
+ * @param code user code
+ */
+export async function deleteCodeAuthorizedCheck(code: string): Promise<boolean> {
+  return CodesAuthorized.destroy({
+    where: {
+      code: code
+    }
+  })
+    .then(() => {
+      return true;
+    })
+    .catch(() => {
+      return false;
+    });
+}
+
+/**
+ * Add a code to the authorized list
+ * @param code user code
+ * @returns true if the code was added, false otherwise
+ */
+export async function addCodeAuthorized(code: string): Promise<boolean> {
+  return CodesAuthorized.create({
+    code: code
+  })
+    .then(() => {
+      return true;
+    })
+    .catch(() => {
+      return false;
+    });
+}

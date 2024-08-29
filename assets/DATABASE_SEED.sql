@@ -38,7 +38,7 @@ CREATE TABLE user_team (
 );
 
 CREATE TABLE codes_authorized (
-  code CHAR(9) PRIMARY KEY,
+  code CHAR(9) PRIMARY KEY
 );
 
 -- Insert team data
