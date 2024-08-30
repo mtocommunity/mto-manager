@@ -12,6 +12,9 @@ const messageCreateEvent: DiscordEvent = {
     // Ignore others users in development
     if (Config.ENV_DEV && !Config.DISCORD.ADMINISTRATORS_ID.includes(msg.author.id)) return;
 
+    // Check if the community guild
+    if (!msg.guild || msg.guild.id !== Config.DISCORD.COMMUNITY_GUILD_ID) return;
+
     if (msg.author.bot) return;
     if (msg.content === '!ping') {
       msg.reply('Pong!');

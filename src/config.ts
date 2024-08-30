@@ -9,7 +9,13 @@ const Config: IConfig = {
     TOKEN: process.env.DISCORD_BOT_TOKEN ?? '',
     BOT_MANAGER_ID: process.env.DISCORD_BOT_MANAGER_ID ?? '',
     ADMINISTRATORS_ID: ['335163330471788545', '1068677180105691240', '678445072173498368'], // First ID is the main administrator
-    COMMUNITY_GUILD_ID: '1261146736064204932'
+    COMMUNITY_GUILD_ID: '1261146736064204932',
+    AUTO_ROLES: [
+      { key: 'valorant', role: '1279107853994688593' },
+      { key: 'minecraft', role: '1279107972659679356' },
+      { key: 'rocketleague', role: '1279107969690374205' },
+      { key: 'leagueoflegends', role: '1279107975402754110' }
+    ]
   },
   AWS: {
     REGION: process.env.AWS_REGION ?? 'us-east-2',

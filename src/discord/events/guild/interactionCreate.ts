@@ -1,6 +1,6 @@
 import { join as joinPath } from 'path';
 import { ApplicationCommandType, BaseInteraction, ButtonInteraction } from 'discord.js';
-import { BtnInteraction, CommandCategory, DiscordEvent, Interaction, InteractionType, ModalInteraction } from '../../../ts';
+import { BtnInteraction, CommandCategory, DiscordEvent, Interaction, InteractionType, ModalInteraction, SelectMenuInteraction } from '../../../ts';
 import { readTypescriptFiles } from '../../../utils';
 import Config from '../../../config';
 
@@ -25,6 +25,9 @@ const interactionCreate: DiscordEvent = {
     // Ignore others users in development
     if (Config.ENV_DEV && !Config.DISCORD.ADMINISTRATORS_ID.includes(interaction.user.id)) return;
 
+    // Check if the community guild
+    if (interaction.guildId !== Config.DISCORD.COMMUNITY_GUILD_ID) return;
+
     // Filter the interaction type
     if (interaction.isButton()) {
       interactions
@@ -44,6 +47,16 @@ const interactionCreate: DiscordEvent = {
           if (i.key === key) {
             // Run the interaction
             (i as ModalInteraction).run(client, interaction, interaction.customId.split('-').slice(1));
+          }
+        });
+    } else if (interaction.isStringSelectMenu()) {
+      interactions
+        .filter((i) => i.type === InteractionType.SELECT_MENU)
+        .forEach(async (i) => {
+          const [key] = interaction.customId.split('-');
+          if (i.key === key) {
+            // Run the interaction
+            (i as SelectMenuInteraction).run(client, interaction, interaction.customId.split('-').slice(1));
           }
         });
     } else if (interaction.isCommand()) {
