@@ -2,10 +2,7 @@ import makeRelations from './relations';
 import Database from './Database';
 
 export async function verifyConnection() {
-  Database.sync({
-    force: false,
-    logging: false
-  })
+  Database.authenticate()
     .then(() => {
       makeRelations();
       console.log('Database connected');

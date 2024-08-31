@@ -1,5 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
 import Database from '../Database';
+import UserProfile from './user_profile';
 
 class User extends Model {
   declare user_id: string;
@@ -8,6 +9,7 @@ class User extends Model {
   declare email: string;
   declare username: string;
   declare verified: boolean;
+  declare profile?: UserProfile;
 }
 
 User.init(
