@@ -10,7 +10,7 @@ export function buildProfileEmbed(profile: UserProfile, user: User): EmbedBuilde
       .setThumbnail(user.displayAvatarURL())
       .setTitle(`Perfil de ${user.displayName}`)
       // .setDescription(`:pencil: Biografía:\`\`\`404: Not found\`\`\`\n:arrow_up: Nivel: \`${profile.level}\` ${buildExperienceBar(profile.experience, 100)} \`${profile.level + 1}\`\n\n`)
-      .setDescription(`\n:arrow_up: Nivel: \`${profile.level}\` ${buildExperienceBar(profile.experience, 100)} \`${profile.level + 1}\`\n\n`)
+      // .setDescription(`\n:arrow_up: Nivel: \`${profile.level}\` ${buildExperienceBar(profile.experience, 100)} \`${profile.level + 1}\`\n\n`)
       .addFields([
         {
           name: 'Lenguajes de programación',
