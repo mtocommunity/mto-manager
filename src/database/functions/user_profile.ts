@@ -1,3 +1,4 @@
+import { TechnologyCategory } from '../../ts';
 import Technologies from '../models/technologies';
 import User from '../models/user';
 import UserProfile from '../models/user_profile';
@@ -62,12 +63,12 @@ export async function getTechnologiesOfUser(discord_id: string): Promise<Technol
  * @param technologies technologies names to get the ids
  * @returns ids of the technologies
  */
-export async function getTechnologiesIdsOfName(technologies: string[]): Promise<number[]> {
-  return Technologies.findAll({
+export async function getTechnologiesOfName(technologies: string[]): Promise<Technologies[]> {
+  return await Technologies.findAll({
     where: {
       name: technologies
     }
-  }).then((technologies) => technologies.map((technology) => technology.technology_id));
+  });
 }
 
 /**
@@ -81,9 +82,10 @@ export async function addTechnologyToUser(discord_id: string, technologies: stri
   if (!profile || !profile.technologies) return;
 
   // Get the ids of the technologies
-  const technology_ids = (await getTechnologiesIdsOfName(technologies))
+  const technology_ids = (await getTechnologiesOfName(technologies))
     // Filter the technologies that the user already has
-    .filter((t) => !profile.technologies?.map((t) => t.technology_id).includes(t));
+    .filter((t) => !profile.technologies?.map((t) => t.technology_id).includes(t.technology_id))
+    .map((t) => t.technology_id);
 
   if (technology_ids.length === 0) return;
 
@@ -106,7 +108,7 @@ export async function removeTechnologyFromUser(discord_id: string, technologies:
   if (!profile || !profile.technologies) return;
 
   // Get the ids of the technologies
-  const technology_ids = await getTechnologiesIdsOfName(technologies);
+  const technology_ids = await (await getTechnologiesOfName(technologies)).map((t) => t.technology_id);
 
   if (technology_ids.length === 0) return;
 
@@ -129,7 +131,7 @@ export async function setTechnologiesToUser(discord_id: string, technologies: st
   if (!profile || !profile.technologies) return;
 
   // Get the ids of the technologies
-  const technology_ids = await getTechnologiesIdsOfName(technologies);
+  const technology_ids = (await getTechnologiesOfName(technologies)).map((t) => t.technology_id);
 
   if (technology_ids.length === 0) return;
 
@@ -139,6 +141,41 @@ export async function setTechnologiesToUser(discord_id: string, technologies: st
     }
   });
 
+  await UserProfileTechnologies.bulkCreate(
+    technology_ids.map((technology_id) => ({
+      user_id: profile.user_id,
+      technology_id: technology_id
+    }))
+  );
+}
+
+// SetTechnologies but with a category
+export async function setTechnologiesToUserWithCategory(discord_id: string, technologies: string[], category: TechnologyCategory): Promise<void> {
+  const profile = await getUserProfile(discord_id);
+
+  if (!profile || !profile.technologies) return;
+
+  // Get all the technologies of the category
+  const allCategoryTechnologies = await Technologies.findAll({
+    where: {
+      category: category
+    }
+  });
+
+  if (allCategoryTechnologies.length === 0) return;
+
+  // Delete all the technologies of the user
+  await UserProfileTechnologies.destroy({
+    where: {
+      user_id: profile.user_id,
+      technology_id: allCategoryTechnologies.map((t) => t.technology_id)
+    }
+  });
+
+  // Get the ids of the technologies
+  const technology_ids = allCategoryTechnologies.filter((t) => technologies.includes(t.name)).map((t) => t.technology_id);
+
+  // Create relationships
   await UserProfileTechnologies.bulkCreate(
     technology_ids.map((technology_id) => ({
       user_id: profile.user_id,

@@ -5,7 +5,7 @@ import { buildProfileEmbed } from '../../static/embeds';
 
 const Profile: Command = {
   name: 'profile',
-  category: CommandCategory.EXPERIMENTAL,
+  category: CommandCategory.GENERAL,
   accessType: CommandAccessType.COMMUNITY_GUILD,
   data: {
     name: 'profile',

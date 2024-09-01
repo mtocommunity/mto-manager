@@ -106,4 +106,7 @@ INSERT INTO technologies (extension, category, name, emoji_id) VALUES
  ('swift', 'programming_language', 'swift', '1277662874373722262'),
  ('typescript', 'programming_language', 'typescript', '1277662860012421273'),
  ('html', 'markup_language', 'html', '1277662844875309089'),
- ('javascript', 'programming_language', 'javascript', '1277662825808003126');
+ ('javascript', 'programming_language', 'javascript', '1277662825808003126'),
+ ('md', 'markup_language', 'markdown', '1279598076943929365'),
+ ('xml', 'markup_language', 'xml', '1279599638034513961'),
+ ('mml', 'markup_language', 'mathml', '1279598403550052434');

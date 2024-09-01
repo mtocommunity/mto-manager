@@ -1,6 +1,7 @@
 import { GuildMemberRoleManager } from 'discord.js';
 import Config from '../../../config';
-import { InteractionType, SelectMenuInteraction } from '../../../ts';
+import { InteractionType, SelectMenuInteraction, TechnologyCategory } from '../../../ts';
+import { setTechnologiesToUserWithCategory } from '../../../database/functions';
 
 const autoroles: SelectMenuInteraction = {
   key: 'utp_autoroles',
@@ -21,12 +22,36 @@ const autoroles: SelectMenuInteraction = {
         });
 
         await interaction.reply({
-          content: '✅ | Se agregaron los roles de juegos correctamente',
+          content: '✅ | Se agregaron los roles de juegos correctamente, serás notificado cuando haya algún evento de juegos.',
           ephemeral: true
         });
         break;
       case 'programming_language':
-        // TODO: Add programming language roles
+        // Set technologies to user
+        await setTechnologiesToUserWithCategory(interaction.user.id, interaction.values, TechnologyCategory.PROGRAMMING_LANGUAGE);
+
+        await interaction.reply({
+          content: '✅ | Ahora estos lenguajes de programación están en tu perfil',
+          ephemeral: true
+        });
+        break;
+      case 'markup_language':
+        // Set technologies to user
+        await setTechnologiesToUserWithCategory(interaction.user.id, interaction.values, TechnologyCategory.MARKUP_LANGUAGE);
+
+        await interaction.reply({
+          content: '✅ | Ahora estos lenguajes de marcado están en tu perfil',
+          ephemeral: true
+        });
+        break;
+      case 'framework':
+        // Set technologies to user
+        await setTechnologiesToUserWithCategory(interaction.user.id, interaction.values, TechnologyCategory.FRAMEWORK);
+
+        await interaction.reply({
+          content: '✅ | Ahora estos frameworks están en tu perfil',
+          ephemeral: true
+        });
         break;
     }
   }

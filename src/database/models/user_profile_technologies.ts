@@ -1,9 +1,11 @@
 import { DataTypes, Model } from 'sequelize';
 import Database from '../Database';
+import Technologies from './technologies';
 
 class UserProfileTechnologies extends Model {
   user_id!: number;
   technology_id!: number;
+  technology?: Technologies;
 }
 
 UserProfileTechnologies.init(
