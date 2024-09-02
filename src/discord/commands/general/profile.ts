@@ -34,7 +34,7 @@ const Profile: Command = {
       return;
     }
 
-    await interaction.reply({ embeds: [buildProfileEmbed(profile, interaction.user)] });
+    await interaction.reply({ embeds: [buildProfileEmbed(profile, user)] });
   }
 };
 
