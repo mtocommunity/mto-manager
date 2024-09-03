@@ -11,7 +11,7 @@ const EMOJI = {
   }
 };
 
-const DIFFICULTY_MULTIPLIER = 7;
+const DIFFICULTY_MULTIPLIER = 3;
 
 export function buildExperienceBar(current: number, needed: number, length: number = 8): string {
   const percentage = Math.round((current / needed) * length);
@@ -28,11 +28,11 @@ export function buildExperienceBar(current: number, needed: number, length: numb
 
 export function requiredExperience(level: number): number {
   if (level >= 30) {
-    return 62 + (level - 30) * DIFFICULTY_MULTIPLIER;
+    return (62 + (level - 30) * 7) * DIFFICULTY_MULTIPLIER;
   } else if (level >= 15) {
-    return 17 + (level - 15) * DIFFICULTY_MULTIPLIER;
+    return (17 + (level - 15) * 3) * DIFFICULTY_MULTIPLIER;
   } else {
-    return 17;
+    return 17 * DIFFICULTY_MULTIPLIER;
   }
 }
 

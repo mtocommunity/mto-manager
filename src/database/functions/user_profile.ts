@@ -1,4 +1,5 @@
 import { TechnologyCategory } from '../../ts';
+import { requiredExperience } from '../../utils';
 import Technologies from '../models/technologies';
 import User from '../models/user';
 import UserProfile from '../models/user_profile';
@@ -182,4 +183,55 @@ export async function setTechnologiesToUserWithCategory(discord_id: string, tech
       technology_id: technology_id
     }))
   );
+}
+
+/**
+ * Method to add experience to a user
+ * @param discord_id discord user
+ * @param experience experience to add
+ * @returns void
+ */
+export async function addExperienceToUser(discord_id: string, experience: number): Promise<void> {
+  const profile = await getUserProfile(discord_id);
+
+  if (!profile) return;
+
+  if (experience < 0) return removeExperienceFromUser(discord_id, experience);
+
+  const requires = requiredExperience(profile.level + 1);
+
+  if (experience >= requires) {
+    // Add experience and level up
+    profile.experience = (experience - requires) % requires;
+    profile.level += 1;
+    await profile.save();
+    return;
+  }
+
+  // Add experience
+  profile.experience += experience;
+  await profile.save();
+  return;
+}
+
+export async function removeExperienceFromUser(discord_id: string, experience: number): Promise<void> {
+  const profile = await getUserProfile(discord_id);
+
+  if (!profile) return;
+
+  if (experience < 0) return addExperienceToUser(discord_id, experience);
+
+  const requires = requiredExperience(profile.level);
+
+  if (profile.experience < experience) {
+    // Remove experience and level down
+    profile.experience = requires - (experience - profile.experience);
+    profile.level -= 1;
+    await profile.save();
+    return;
+  }
+
+  // Remove experience
+  profile.experience -= experience;
+  await profile.save();
 }
