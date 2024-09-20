@@ -1,11 +1,15 @@
 import CodesAuthorized from '../models/codes_authorized';
 
+const whitelist = false; // true or false
+
 /**
  *
  * @param code user code
  * @returns true if the code is authorized, false otherwise
  */
 export async function isAuthorized(code: string): Promise<boolean> {
+  if (!whitelist) return true; // If the whitelist is disabled, return true
+
   return (
     (await CodesAuthorized.findOne({
       where: {
@@ -20,6 +24,8 @@ export async function isAuthorized(code: string): Promise<boolean> {
  * @param code user code
  */
 export async function deleteCodeAuthorized(code: string): Promise<void> {
+  if (!whitelist) return; // If the whitelist is disabled, return
+
   await CodesAuthorized.destroy({
     where: {
       code: code
