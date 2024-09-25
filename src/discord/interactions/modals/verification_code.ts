@@ -23,7 +23,7 @@ const verification: ModalInteraction = {
     // Check if the code is valid
     const verificationCodeDat = await existCode(memberId);
     if (!verificationCodeDat) {
-      interaction.reply({ content: '❌ | No existe un código de verificación' });
+      interaction.reply({ content: '❌ | No existe un código de verificación', ephemeral: true });
       return;
     }
 
