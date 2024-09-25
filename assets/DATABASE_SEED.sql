@@ -5,7 +5,7 @@ CREATE TABLE user (
   discord_id CHAR(20) NOT NULL UNIQUE,
   user_code CHAR(9) NOT NULL UNIQUE,
   email CHAR(20) NOT NULL UNIQUE,
-  username VARCHAR(20) NOT NULL,
+  username VARCHAR(32) NOT NULL,
   verified BOOLEAN NOT NULL DEFAULT FALSE
 );
 
