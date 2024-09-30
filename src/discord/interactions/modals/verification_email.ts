@@ -83,6 +83,37 @@ const verification: ModalInteraction = {
       return;
     }
 
+    // Check if the user is already registered
+    const discordUserData = await User.findOne({ where: { discord_id: interaction.user.id } });
+    if (discordUserData) {
+      discordUserData.email = email;
+      if (discordUserData.verified) {
+        interaction.reply({
+          content: '❌ | Este correo ya está registrado',
+          ephemeral: true
+        });
+        return;
+      }
+      await discordUserData.save();
+      const verificationCodeData = await VerifyCode.findOne({ where: { discord_id: interaction.user.id } });
+      if (verificationCodeData) {
+        const code = generateAlphaNumericCode(6);
+        verificationCodeData.code = code;
+        verificationCodeData.created_at = new Date();
+        await verificationCodeData.save();
+        await sendEmail(email, code, interaction);
+      } else {
+        const code = generateAlphaNumericCode(6);
+        const verificationCode = new VerifyCode({
+          discord_id: interaction.user.id,
+          code: code
+        });
+        await verificationCode.save();
+        await sendEmail(email, code, interaction);
+      }
+      return;
+    }
+
     // Register user
     const user = new User({
       discord_id: interaction.user.id,
