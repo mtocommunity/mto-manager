@@ -10,6 +10,7 @@ class User extends Model {
   declare username: string;
   declare verified: boolean;
   declare profile?: UserProfile;
+  declare verifyCode?: any;
 }
 
 User.init(
