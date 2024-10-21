@@ -38,7 +38,7 @@ const verification: ModalInteraction = {
 
     // Check if the code is expired (15 minutes)
     if (verificationCodeDat.created_at.getTime() < Date.now() - 15 * 60 * 1000) {
-      await deleteCode(interaction.id);
+      await deleteCode(interaction.user.id);
       interaction.reply({
         content: '❌ | Código de verificación expirado',
         ephemeral: true
@@ -57,7 +57,7 @@ const verification: ModalInteraction = {
     // Set the roles
     await guildMemberRoleManager.add(Config.COMMUNITY_GUILD.colaboratorRole);
     await guildMemberRoleManager.remove(Config.COMMUNITY_GUILD.unverifyRole);
-    await deleteCode(interaction.id);
+    await deleteCode(interaction.user.id);
 
     // Save the user
     await userData.save();
