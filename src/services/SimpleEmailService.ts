@@ -34,6 +34,25 @@ class EmailSender {
     }
   }
 
+  /**
+   * Send test email
+   * @param email email destination
+   * @param message optional message
+   * @returns true if email was sent successfully, false otherwise
+   */
+  async sendTestEmail(email: string, message: string = 'This is a test email sent by the administrator'): Promise<boolean> {
+    const params = this.basicEmailParams(email, 'Test Email');
+
+    params.Message.Body.Html.Data = message;
+
+    try {
+      await this.client.send(new SendEmailCommand(params));
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
   basicEmailParams(email: string, subject: string) {
     return {
       Destination: {
